@@ -4,7 +4,7 @@ Build a few jobs, register them, run them, print a summary.
 """
 
 
-from models import EmailJob, DataProcessingJob
+from models import EmailJob, DataProcessingJob, PriorityJob
 
 from task_manager import TaskManager
 
@@ -22,6 +22,11 @@ def build_jobs():
         EmailJob(3, "admin@example.com"),
 
         DataProcessingJob(4, "dataset_B"),
+
+        # New priority jobs
+        PriorityJob("5", "Fix critical server error", priority="critical"),
+        PriorityJob("6", "Send weekly newsletter", priority="low"),
+        PriorityJob("7", "Process payment batch", priority="high"),
 
     ]
 

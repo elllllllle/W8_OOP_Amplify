@@ -77,3 +77,23 @@ class DataProcessingJob(Job):
         print(f"Processing dataset {self.dataset}...")
 
         # FIX (models.py): removed self.mark_done() here — same reason as EmailJob above.
+
+
+# Activity 2: PriorityJob - Add Job Prioritisation
+
+class PriorityJob(Job):
+    PRIORITY_LEVELS = ["low", "medium", "high", "critical"]
+
+    def __init__(self, job_id, description, priority="medium"):
+        super().__init__(job_id, description)
+        if priority not in self.PRIORITY_LEVELS:
+            raise ValueError(f"Invalid priority. Choose from: {self.PRIORITY_LEVELS}")
+        self.__priority = priority  # private attribute (encapsulation)
+
+    def get_priority(self):
+        return self.__priority
+
+    def execute(self):
+        print(f"[PriorityJob] Executing job {self.job_id} "
+              f"with priority '{self.__priority}': {self.description}")
+        self.mark_done()
